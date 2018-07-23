@@ -7,7 +7,7 @@ import JobsMapContext from '../Context';
 
 const State = styled.path`
   cursor: pointer;
-  fill: transparent;
+  fill: #0094ff;
   stroke: #fff;
   stroke-width: 1;
   stroke-linejoin: bevel;
@@ -35,9 +35,17 @@ export default class USMap extends Component {
         .translate([this.xScale / 2, this.yScale / 2 - 25])
     );
 
+    const states = feature(US, US.objects.states).features.map(d => {
+      return <State d={path(d)} key={`state-${d.id}`} />;
+    });
+
     return (
       <JobsMapContext.Consumer>
-        {context => <p>{context.state.currentYear}</p>}
+        {context => (
+          <svg width="100%" viewBox={`0 0 ${this.xScale} ${this.yScale}`}>
+            {states}
+          </svg>
+        )}
       </JobsMapContext.Consumer>
     );
   }

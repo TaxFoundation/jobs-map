@@ -1,4 +1,4 @@
-import React, { Compinent } from 'react';
+import React from 'react';
 import JobsMapContext from '../Context';
 import styled from 'styled-components';
 
