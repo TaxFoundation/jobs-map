@@ -1,13 +1,18 @@
 import React, { Component } from 'react';
 import JobsMapContext from './Context';
+import JOBS from './data/jobs.json';
+import Slider from './components/Slider';
+import USMap from './components/USMap';
 
 class Provider extends Component {
   constructor() {
     super();
 
     this.state = {
-      year: 2018,
+      currentYear: 2018,
     };
+
+    this.years = JOBS.map(y => y.year).sort((a, b) => a - b);
   }
 
   render() {
@@ -20,6 +25,7 @@ class Provider extends Component {
               [pieceOfState]: data,
             });
           },
+          years: this.years,
         }}
       >
         {this.props.children}
@@ -32,7 +38,10 @@ class App extends Component {
   render() {
     return (
       <Provider>
-        <div />
+        <div>
+          <Slider />
+          <USMap />
+        </div>
       </Provider>
     );
   }
