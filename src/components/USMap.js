@@ -19,7 +19,9 @@ const tooltipText = (diff, stateData) => `
     stateData.name
   }</p>
   <div style="padding: 6px;">
-    <p>Cumulative Jobs Added: ${formatter(stateData.jobs, ',')}</p>
+    <p style="font-size: 14px">Cumulative Full Time Equivalent Jobs Added:</p>
+    <p style="font-size: 22px; text-align: center;">
+      ${formatter(stateData.jobs, ',')}</p>
   </div>
 `;
 
