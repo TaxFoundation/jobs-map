@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import JobsMapContext from '../Context';
 import styled from 'styled-components';
 import RangeInput from './RangeInput';
+import { formatter } from '../helpers';
 
 const SliderContainer = styled.div`
   align-content: center;
@@ -17,33 +18,49 @@ const Label = styled.div`
   text-align: center;
 `;
 
+const SummaryStats = styled.div`
+  font-family: 'Lato', sans-serif;
+  text-align: center;
+`;
+
 const Slider = () => {
   return (
     <JobsMapContext.Consumer>
-      {context => (
-        <SliderContainer>
-          <Label>{Math.min(...context.years)}</Label>
-          <div>
-            <RangeInput
-              type="range"
-              list="years"
-              min={Math.min(...context.years)}
-              max={Math.max(...context.years)}
-              step="1"
-              value={context.state.currentYear}
-              onChange={e =>
-                context.updateState('currentYear', +e.target.value)
-              }
-            />
-            <datalist id="years">
-              {context.years.map((y, i) => (
-                <option value={y} key={`range-${y}`} />
-              ))}
-            </datalist>
-          </div>
-          <Label>{Math.max(...context.years)}</Label>
-        </SliderContainer>
-      )}
+      {context => {
+        let thisYear = context.data.find(
+          d => d.year === context.state.currentYear
+        );
+        return (
+          <Fragment>
+            <SliderContainer>
+              <Label>{Math.min(...context.years)}</Label>
+              <div>
+                <RangeInput
+                  type="range"
+                  list="years"
+                  min={Math.min(...context.years)}
+                  max={Math.max(...context.years)}
+                  step="1"
+                  value={context.state.currentYear}
+                  onChange={e =>
+                    context.updateState('currentYear', +e.target.value)
+                  }
+                />
+                <datalist id="years">
+                  {context.years.map((y, i) => (
+                    <option value={y} key={`range-${y}`} />
+                  ))}
+                </datalist>
+              </div>
+              <Label>{Math.max(...context.years)}</Label>
+            </SliderContainer>
+            <SummaryStats>
+              <p>Year: {context.state.currentYear}</p>
+              <p>Cumulative Jobs Added: {formatter(thisYear.total, ',')}</p>
+            </SummaryStats>
+          </Fragment>
+        );
+      }}
     </JobsMapContext.Consumer>
   );
 };
