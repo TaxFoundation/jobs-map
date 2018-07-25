@@ -22,9 +22,10 @@ const SummaryHeader = styled.thead`
 `;
 
 const SummaryBody = styled.div`
+  align-content: center;
   display: grid;
   grid-gap: 18px;
-  grid-template: repeat(2, auto) / repeat(2, auto);
+  grid-template: auto / repeat(2, auto);
   padding: 18px;
 `;
 
@@ -35,16 +36,10 @@ const SummaryStats = props => (
     <SummaryHeader>{props.year}</SummaryHeader>
     <SummaryBody>
       <SummaryCell style={{ textAlign: 'left' }}>
-        Cumulative Jobs Added
+        Cumulative Increase in Full Time Equivalent Jobs
       </SummaryCell>
-      <SummaryCell style={{ textAlign: 'right' }}>
+      <SummaryCell style={{ textAlign: 'right', fontSize: '22px' }}>
         {formatter(props.total, ',')}
-      </SummaryCell>
-      <SummaryCell style={{ textAlign: 'left' }}>
-        Cumulative Percent Change
-      </SummaryCell>
-      <SummaryCell style={{ textAlign: 'right' }}>
-        {formatter(props.diff, '%')}
       </SummaryCell>
     </SummaryBody>
   </SummaryStatsContainer>
