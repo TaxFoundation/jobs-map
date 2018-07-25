@@ -17,6 +17,7 @@ const SummaryStatsContainer = styled.div`
 const SummaryHeader = styled.thead`
   background-color: #0094ff;
   color: #fff;
+  font-size: 22px;
   padding: 12px;
 `;
 
