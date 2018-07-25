@@ -1,14 +1,11 @@
 import React from 'react';
 import JobsMapContext from '../Context';
 import styled from 'styled-components';
+import RangeInput from './RangeInput';
 
 const SliderContainer = styled.div`
   display: grid;
   grid-template: auto / 1fr 5fr 1fr;
-`;
-
-const RangeInput = styled.input`
-  width: 100%;
 `;
 
 const Label = styled.div`

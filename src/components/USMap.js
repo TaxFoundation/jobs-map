@@ -39,7 +39,6 @@ class MapSvg extends Component {
       let stateData = this.props.data.states.find(s => {
         return +s.fips === +d.id;
       });
-      console.log(stateData);
 
       return (
         <State
