@@ -4,10 +4,10 @@ import { geoAlbersUsa, geoPath } from 'd3-geo';
 import { feature } from 'topojson-client';
 import US from '../data/us.json';
 import JobsMapContext from '../Context';
+import { colorize } from '../helpers';
 
 const State = styled.path`
   cursor: pointer;
-  fill: #0094ff;
   stroke: #fff;
   stroke-width: 1;
   stroke-linejoin: bevel;
@@ -18,9 +18,9 @@ const State = styled.path`
   }
 `;
 
-export default class USMap extends Component {
-  constructor() {
-    super();
+class MapSvg extends Component {
+  constructor(props) {
+    super(props);
 
     this.scale = 780;
     this.xScale = 600;
@@ -36,17 +36,38 @@ export default class USMap extends Component {
     );
 
     const states = feature(US, US.objects.states).features.map(d => {
-      return <State d={path(d)} key={`state-${d.id}`} />;
+      let stateData = this.props.data.states.find(s => {
+        return +s.fips === +d.id;
+      });
+      console.log(stateData);
+
+      return (
+        <State
+          d={path(d)}
+          key={`state-${d.id}`}
+          fill={
+            stateData ? colorize(stateData.jobs, [0, 100000]) : 'transparent'
+          }
+        />
+      );
     });
 
     return (
-      <JobsMapContext.Consumer>
-        {context => (
-          <svg width="100%" viewBox={`0 0 ${this.xScale} ${this.yScale}`}>
-            {states}
-          </svg>
-        )}
-      </JobsMapContext.Consumer>
+      <svg width="100%" viewBox={`0 0 ${this.xScale} ${this.yScale}`}>
+        {states}
+      </svg>
     );
   }
 }
+
+const USMap = () => (
+  <JobsMapContext.Consumer>
+    {context => (
+      <MapSvg
+        data={context.data.find(d => d.year === context.state.currentYear)}
+      />
+    )}
+  </JobsMapContext.Consumer>
+);
+
+export default USMap;

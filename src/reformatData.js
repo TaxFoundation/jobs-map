@@ -22,7 +22,6 @@ const updateData = (input, output) => {
     ];
 
     rawJson.forEach(r => {
-      console.log(r.fips);
       newData.forEach(y => {
         y.states.push({ fips: r.fips, jobs: r[y.year] });
       });

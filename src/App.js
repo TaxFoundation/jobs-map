@@ -25,6 +25,7 @@ class Provider extends Component {
               [pieceOfState]: data,
             });
           },
+          data: JOBS,
           years: this.years,
         }}
       >
