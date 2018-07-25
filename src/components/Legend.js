@@ -10,7 +10,7 @@ const LegendContainer = styled.div`
 `;
 
 const LegendText = styled.p`
-  font-size: 14px;
+  font-size: 16px;
   font-family: 'Lato', sans-serif;
   margin: 0;
   padding: 0 15px;
