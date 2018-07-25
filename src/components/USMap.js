@@ -1,16 +1,33 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import styled from 'styled-components';
 import { geoAlbersUsa, geoPath } from 'd3-geo';
 import { feature } from 'topojson-client';
 import US from '../data/us.json';
 import JobsMapContext from '../Context';
-import { colorize } from '../helpers';
+import { colorize, formatter } from '../helpers';
+import Tooltip from './Tooltip';
 
 const State = styled.path`
   cursor: pointer;
   stroke: #fff;
   stroke-width: 1;
   stroke-linejoin: bevel;
+`;
+
+const tooltipText = (diff, stateData) => `
+  <p style="text-align: center; font-weight: 700;">${stateData.name}</p>
+  <div style="display: table-row; margin-bottom: 40px; padding: 6px;">
+    <p style="display: table-cell">Cumulative Jobs Added:</p>
+    <p style="display: table-cell; text-align: right">
+      ${formatter(stateData.jobs, ',')}
+    </p>
+  </div>
+  <div style="display: table-row; padding: 6px;">
+    <p style="display: table-cell"> Cumulative Percent Change:</p>
+    <p style="display: table-cell; text-align: right">
+      ${formatter(diff, '%')}
+    </p>
+  </div>
 `;
 
 class MapSvg extends Component {
@@ -40,6 +57,11 @@ class MapSvg extends Component {
           d={path(d)}
           key={`state-${d.id}`}
           fill={colorize(this.props.data.diff, [0, 0.01])}
+          data-tip={
+            stateData ? tooltipText(this.props.data.diff, stateData) : null
+          }
+          data-for="usmap"
+          data-html={true}
         />
       );
     });
@@ -55,9 +77,12 @@ class MapSvg extends Component {
 const USMap = () => (
   <JobsMapContext.Consumer>
     {context => (
-      <MapSvg
-        data={context.data.find(d => d.year === context.state.currentYear)}
-      />
+      <Fragment>
+        <MapSvg
+          data={context.data.find(d => d.year === context.state.currentYear)}
+        />
+        <Tooltip id="usmap" aria-haspopup="true" />
+      </Fragment>
     )}
   </JobsMapContext.Consumer>
 );

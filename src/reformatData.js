@@ -23,7 +23,7 @@ const updateData = (input, output) => {
 
     rawJson.forEach(r => {
       newData.forEach(y => {
-        y.states.push({ fips: r.fips, jobs: r[y.year] });
+        y.states.push({ name: r.name, fips: r.fips, jobs: r[y.year] });
       });
     });
     //write file
