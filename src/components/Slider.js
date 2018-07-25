@@ -2,7 +2,7 @@ import React, { Fragment } from 'react';
 import JobsMapContext from '../Context';
 import styled from 'styled-components';
 import RangeInput from './RangeInput';
-import { formatter } from '../helpers';
+import SummaryStats from './SummaryStats';
 
 const SliderContainer = styled.div`
   align-content: center;
@@ -15,11 +15,6 @@ const SliderContainer = styled.div`
 const Label = styled.div`
   font-family: 'Lato', sans-serif;
   font-size: 20px;
-  text-align: center;
-`;
-
-const SummaryStats = styled.div`
-  font-family: 'Lato', sans-serif;
   text-align: center;
 `;
 
@@ -54,10 +49,11 @@ const Slider = () => {
               </div>
               <Label>{Math.max(...context.years)}</Label>
             </SliderContainer>
-            <SummaryStats>
-              <p>Year: {context.state.currentYear}</p>
-              <p>Cumulative Jobs Added: {formatter(thisYear.total, ',')}</p>
-            </SummaryStats>
+            <SummaryStats
+              year={thisYear.year}
+              total={thisYear.total}
+              diff={thisYear.diff}
+            />
           </Fragment>
         );
       }}

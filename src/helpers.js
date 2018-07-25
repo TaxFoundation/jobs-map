@@ -4,15 +4,14 @@ import { format } from 'd3-format';
 export const colorize = (value, domain) => {
   return chroma
     .scale([
-      '#f7fcfd',
-      '#e0ecf4',
-      '#bfd3e6',
-      '#9ebcda',
-      '#8c96c6',
-      '#8c6bb1',
-      '#88419d',
-      '#810f7c',
-      '#4d004b',
+      '#c7e9b4',
+      '#7fcdbb',
+      '#41b6c4',
+      '#1d91c0',
+      '#225ea8',
+      '#253494',
+      '#421496',
+      '#330963',
     ])
     .domain(domain)(value);
 };

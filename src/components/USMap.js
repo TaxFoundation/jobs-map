@@ -6,6 +6,7 @@ import US from '../data/us.json';
 import JobsMapContext from '../Context';
 import { colorize, formatter } from '../helpers';
 import Tooltip from './Tooltip';
+import Legend from './Legend';
 
 const State = styled.path`
   cursor: pointer;
@@ -15,18 +16,11 @@ const State = styled.path`
 `;
 
 const tooltipText = (diff, stateData) => `
-  <p style="text-align: center; font-weight: 700;">${stateData.name}</p>
-  <div style="display: table-row; margin-bottom: 40px; padding: 6px;">
-    <p style="display: table-cell">Cumulative Jobs Added:</p>
-    <p style="display: table-cell; text-align: right">
-      ${formatter(stateData.jobs, ',')}
-    </p>
-  </div>
-  <div style="display: table-row; padding: 6px;">
-    <p style="display: table-cell"> Cumulative Percent Change:</p>
-    <p style="display: table-cell; text-align: right">
-      ${formatter(diff, '%')}
-    </p>
+  <p style="text-align: center; font-weight: 700; border-bottom: 1px solid #eee; padding-bottom: 16px;">${
+    stateData.name
+  }</p>
+  <div style="padding: 6px;">
+    <p>Cumulative Jobs Added: ${formatter(stateData.jobs, ',')}</p>
   </div>
 `;
 
@@ -81,6 +75,7 @@ const USMap = () => (
         <MapSvg
           data={context.data.find(d => d.year === context.state.currentYear)}
         />
+        <Legend steps={20} />
         <Tooltip id="usmap" aria-haspopup="true" />
       </Fragment>
     )}
