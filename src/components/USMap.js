@@ -11,11 +11,6 @@ const State = styled.path`
   stroke: #fff;
   stroke-width: 1;
   stroke-linejoin: bevel;
-
-  &:hover {
-    fill: rgba(255, 255, 255, 0.3);
-    stroke-width: 2;
-  }
 `;
 
 class MapSvg extends Component {
@@ -44,9 +39,7 @@ class MapSvg extends Component {
         <State
           d={path(d)}
           key={`state-${d.id}`}
-          fill={
-            stateData ? colorize(stateData.jobs, [0, 100000]) : 'transparent'
-          }
+          fill={colorize(this.props.data.diff, [0, 0.01])}
         />
       );
     });

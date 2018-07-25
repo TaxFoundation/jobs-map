@@ -9,16 +9,16 @@ const updateData = (input, output) => {
 
     //create new structure
     let newData = [
-      { year: 2018, states: [] },
-      { year: 2019, states: [] },
-      { year: 2020, states: [] },
-      { year: 2021, states: [] },
-      { year: 2022, states: [] },
-      { year: 2023, states: [] },
-      { year: 2024, states: [] },
-      { year: 2025, states: [] },
-      { year: 2026, states: [] },
-      { year: 2027, states: [] },
+      { year: 2018, states: [], diff: 0.001445 },
+      { year: 2019, states: [], diff: 0.003119 },
+      { year: 2020, states: [], diff: 0.004746 },
+      { year: 2021, states: [], diff: 0.006165 },
+      { year: 2022, states: [], diff: 0.007193 },
+      { year: 2023, states: [], diff: 0.008222 },
+      { year: 2024, states: [], diff: 0.009082 },
+      { year: 2025, states: [], diff: 0.009701 },
+      { year: 2026, states: [], diff: 0.009062 },
+      { year: 2027, states: [], diff: 0.008175 },
     ];
 
     rawJson.forEach(r => {
