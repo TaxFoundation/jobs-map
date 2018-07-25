@@ -4,9 +4,8 @@ import { geoAlbersUsa, geoPath } from 'd3-geo';
 import { feature } from 'topojson-client';
 import US from '../data/us.json';
 import JobsMapContext from '../Context';
-import { colorize, formatter } from '../helpers';
+import { formatter } from '../helpers';
 import Tooltip from './Tooltip';
-import Legend from './Legend';
 
 const State = styled.path`
   cursor: pointer;
@@ -50,7 +49,7 @@ class MapSvg extends Component {
         <State
           d={path(d)}
           key={`state-${d.id}`}
-          fill={colorize(this.props.data.diff, [0, 0.01])}
+          fill="#0094ff"
           data-tip={
             stateData ? tooltipText(this.props.data.diff, stateData) : null
           }
@@ -75,7 +74,6 @@ const USMap = () => (
         <MapSvg
           data={context.data.find(d => d.year === context.state.currentYear)}
         />
-        <Legend steps={20} />
         <Tooltip id="usmap" aria-haspopup="true" />
       </Fragment>
     )}
