@@ -4,11 +4,16 @@ import styled from 'styled-components';
 import RangeInput from './RangeInput';
 
 const SliderContainer = styled.div`
+  align-content: center;
+  align-items: center;
   display: grid;
-  grid-template: auto / 1fr 5fr 1fr;
+  grid-gap: 10px;
+  grid-template: auto / 1fr 6fr 1fr;
 `;
 
 const Label = styled.div`
+  font-family: 'Lato', sans-serif;
+  font-size: 20px;
   text-align: center;
 `;
 
